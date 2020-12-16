@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euxo pipefail
+set -euo pipefail
 
 
 DEAD_URLS='opencollective.com','http://copperdroid.isg.rhul.ac.uk/copperdroid/',\
@@ -18,16 +18,13 @@ DEAD_URLS='opencollective.com','http://copperdroid.isg.rhul.ac.uk/copperdroid/',
 'http://codekiem.com/2012/02/24/apk-downloader/','https://apkscan.nviso.be',\
 'http://ww38.xchg.info','https://thecobraden.com/projects/cobradroid',\
 'https://bitbucket.org/mstrobel/procyon/wiki/',\
-'https://code.google.com/p/androguard/wiki/DatabaseAndroidMalwares'\
-'https://github.com/ashishb/android-security-awesome/actions'
+'https://code.google.com/p/androguard/wiki/DatabaseAndroidMalwares',\
+'https://github.com/ashishb/android-security-awesome/actions',\
+'https://pscout.csl.toronto.edu'
 
 FLAKY_URLS='http://safe.ijiami.cn/'
 SRC_FILE=README.md
-# Run `gem install awesome_bot` to install awesome_bot
-awesome_bot \
-  --allow-redirect \
-  --allow-ssl \
-  --skip-save-results \
-  --request-delay 1 \
+urlsup \
+  --allow 301,302 \
   --white-list ${DEAD_URLS},${FLAKY_URLS} \
-  --files ${SRC_FILE}
+  ${SRC_FILE}
